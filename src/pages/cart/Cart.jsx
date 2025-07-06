@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteFromCart } from "../../redux/cartSlice";
 import { toast } from "react-toastify";
 import { fireDB } from "../../firebase/FirebaseConfig";
+import { useNavigate } from "react-router-dom";
 
 function Cart() {
   const context = useContext(myContext);
@@ -116,6 +117,8 @@ function Cart() {
     pay.open();
     console.log(pay);
   };
+  const navigate = useNavigate();
+
 
   return (
     <Layout>
@@ -243,13 +246,14 @@ function Cart() {
               </div>
             </div>
             {/* <Modal  /> */}
-            {/* <button
+             <button
               type="button"
+              onClick={()=>navigate('/payment')}
               className="w-full  bg-violet-600 py-2 text-center rounded-lg text-white font-bold "
             >
               Buy Now
-            </button> */}
-            <Modal
+            </button> 
+            {/* <Modal
               name={name}
               address={address}
               pincode={pincode}
@@ -259,7 +263,7 @@ function Cart() {
               setPincode={setPincode}
               setPhoneNumber={setPhoneNumber}
               buyNow={buyNow}
-            />
+            /> */}
           </div>
         </div>
       </div>

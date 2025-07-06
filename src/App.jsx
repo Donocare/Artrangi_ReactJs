@@ -17,6 +17,8 @@ import UpdateProduct from "./pages/admin/pages/UpdateProduct";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"
 import Order from "./pages/order/Order";
+import PaymentPage from "./pages/payment/PaymentPage";
+import ConfirmationPage from "./pages/payment/ConfirmationPage";
 
 function App(){
   return (
@@ -47,8 +49,10 @@ function App(){
               <UpdateProduct/>
             </ProtectedRoutesForAdmin>
           }/>
-          <Route path="/productindo/:id" element={<ProductInfo/>}/>
+          <Route path="/productinfo/:id" element={<ProductInfo/>}/>
           <Route path="/*" element={<NoPage />} />
+          <Route path="/payment" element={<PaymentPage />} />
+          <Route path="/confirmation" element={<ConfirmationPage />} />
         </Routes>
         <ToastContainer/>
       </Router>
@@ -61,10 +65,11 @@ export default App;
 
 //user
 export const ProtectedRoutes = ({ children }) => {
-  if (localStorage.getItem('currentUser')) {
+  const user = localStorage.getItem('user')
+  if(user){
     return children
   }
-  else {
+  else{
     return <Navigate to='/login' />
   }
 }
